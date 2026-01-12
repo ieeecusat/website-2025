@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono,Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
+import { ViewTransitions } from "next-view-transitions";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
-  subsets:["latin"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -29,14 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <meta name="apple-mobile-web-app-title" content="IEEE CUSAT" />
-            <body
-              className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
-            >
-              <Navbar/>
-              {children}
-            </body>
-          </html>
-          );
+    <ViewTransitions>
+      <html lang="en">
+        <meta name="apple-mobile-web-app-title" content="IEEE CUSAT" />
+        <body
+          className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
+        >
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ViewTransitions>
+  );
 }

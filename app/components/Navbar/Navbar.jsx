@@ -4,6 +4,8 @@ import Link from 'next/link';
 import './navbar.css';
 import { gsap } from 'gsap/gsap-core';
 import { useGSAP } from '@gsap/react';
+import { useTransitionRouter } from 'next-view-transitions';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   
@@ -54,11 +56,42 @@ const Navbar = () => {
       }
     },[isMenuOpen])
 
+    const router = useTransitionRouter();
+    const pathname = usePathname();
+
+    function triggerPageTransition(){
+      document.documentElement.animate([
+        {
+         clipPath: "polygon(0% 45%, 100% 45%, 100% 55%, 0% 55%)",
+        },
+        {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        }
+      ],{
+        duration:1000,
+        easing:"cubic-bezier(0.87, 0, 0.13, 1)",
+        pseudoElement:"::view-transition-new(root)",
+      })
+    }
+
+    const handleNavigation = (path) => (e) =>{
+      if (path == pathname){
+        e.preventDefault();
+        return;
+      }
+
+      router.push(path,{
+        onTransitionReady: triggerPageTransition,
+      })
+    }
+
   return (
+    <>
+    <div className="revealer"></div>
     <div className="menu-container" ref={container}>
       <div className="menu-bar">
         <div className="menu-logo">
-          <Link href={"/"}>IEEE CUSAT</Link>
+          <Link href={"/"} onClick={handleNavigation("/")}>IEEE CUSAT</Link>
         </div>
         <div className="menu-open" onClick={toggleMenu}>
           <p>Menu</p>
@@ -67,7 +100,7 @@ const Navbar = () => {
       <div className="menu-overlay">
         <div className="menu-overlay-bar">
           <div className="menu-logo">
-            <Link href={"/"}>IEEE CUSAT</Link>
+            <Link href={"/"} onClick={handleNavigation("/")}>IEEE CUSAT</Link>
           </div>
           <div className="menu-close" onClick={toggleMenu}>
             <p>Close</p>
@@ -81,7 +114,7 @@ const Navbar = () => {
             {menuLinks.map((link,index)=>(
               <div className="menu-link-item" key={index}>
                 <div className="menu-link-item-holder" onClick={toggleMenu}>
-                  <Link href={link.path} className="menu-link">
+                  <Link href={link.path} className="menu-link" onClick={handleNavigation(link.path)}>
                   {link.label}</Link>
                 </div>
               </div>
@@ -103,6 +136,7 @@ const Navbar = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

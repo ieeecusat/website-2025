@@ -1,10 +1,16 @@
+"use client";
 import React from 'react'
+import {useRevealer} from "@/app/hooks/useRevealer";
 
 function page() {
+  useRevealer();
   return (
-    <div>
+    <>
+    <div className="revealer"></div>
+    <div >
       <h1>Members<sup>(07)</sup></h1>
     </div>
+    </>
   )
 }
 
