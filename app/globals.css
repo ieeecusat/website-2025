@@ -27,6 +27,7 @@ body {
 
 html{
   background-color: #09102a;
+  scrollbar-gutter: stable;
 }
 
 *{
@@ -46,7 +47,16 @@ body{
     #1e3a8a 75%,
     #09102a 100%
   );
+  background-attachment: fixed;
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  flex: 1;
+  position: relative;
   width: 100%;
 }
 

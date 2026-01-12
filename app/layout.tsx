@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
 import { ViewTransitions } from "next-view-transitions";
+import Footer from "./components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,8 @@ export default function RootLayout({
           className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
         >
           <Navbar />
-          {children}
+          <main>{children}</main>
+          <Footer/>
         </body>
       </html>
     </ViewTransitions>
