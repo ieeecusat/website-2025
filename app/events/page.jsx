@@ -2,9 +2,8 @@ import React from 'react'
 
 function page() {
   return (
-    <div className="">
-      <h1>Home <sup>(01)</sup></h1>
-
+    <div>
+      <h1>Events<sup>(04)</sup></h1>
     </div>
   )
 }

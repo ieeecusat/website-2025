@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +11,11 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets:["latin"],
 });
 
 export const metadata: Metadata = {
@@ -26,8 +32,9 @@ export default function RootLayout({
     <html lang="en">
       <meta name="apple-mobile-web-app-title" content="IEEE CUSAT" />
             <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+              className={`${spaceGrotesk.variable} ${spaceGrotesk.variable} antialiased`}
             >
+              <Navbar/>
               {children}
             </body>
           </html>
